@@ -43,16 +43,11 @@ def participantes_details(participante_id):
 @app.route("/participantes/new")
 def participantes_new():
     args = dict(request.args)
-    if "Nombre" not in args.keys(): 
-        return {"Error": "Nombre es un parámetro obligatorio"}
-                
-        # Para asegurarnos de no duplicar participantes hacemos lo siguiente:
     q = {"Nombre":args["Nombre"]}
-    data =read_data(q,"Participantes")
-    if len(data)>1:
-        return{"Error": "El participante ya está registrado"}
-
-    res = insert_data(args,"Participantes")
+    data = read_data(q, coll = "Participantes")
+    if len(data)>0:
+        return {"Error":"El participante ya existe"}
+    res = insert_data (coll = "Participantes", data = args)
     return json_util.dumps({"_id":res})
 
 app.run(debug = True)

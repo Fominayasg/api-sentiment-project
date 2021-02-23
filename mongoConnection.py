@@ -7,7 +7,7 @@ db.create_collection(name= 'Grupos')
 db.create_collection(name= 'Participantes')'''
 
 def insert_data (coll,data,database = db):
-    res = database[coll].insert_one (data)
+    res = database[coll].insert_one(data)
     return res.inserted_id
 
 def read_data (query,coll,database = db, project=None):
