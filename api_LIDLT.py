@@ -42,12 +42,12 @@ def participantes_details(participante_id):
 
 @app.route("/participantes/new")
 def participantes_new():
-    args = dict(request.args)
-    q = {"Nombre":args["Nombre"]}
+    argus = dict(request.args)
+    q = {"Nombre":argus["Nombre"]}
     data = read_data(q, coll = "Participantes")
     if len(data)>0:
         return {"Error":"El participante ya existe"}
-    res = insert_data (coll = "Participantes", data = args)
+    res = insert_data (coll = "Participantes", data = argus)
     return json_util.dumps({"_id":res})
 
 app.run(debug = True)
